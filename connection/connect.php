@@ -1,14 +1,16 @@
 <?php
 
-$servername = "localhost";
-$username = "bc910733047971";
-$password = "46552ef2";
-$dbname = "	heroku_ec1009a765ac2cf";
+$url = parse_url(getenv("CLEARDB_DATABASE_URL"));
 
-$db = mysqli_connect($servername, $username, $password, $dbname);
+$server = $url["host"];
+$username = $url["user"];
+$password = $url["pass"];
+$db = substr($url["path"], 1);
+
+$db = mysqli_connect($server, $username, $password, $db);
 
 if (!$db) {	
-    die("Connection failed: " . mysqli_connect_error());
+    die("Connection faileds: " . mysqli_connect_error());
 }
 
 ?>
